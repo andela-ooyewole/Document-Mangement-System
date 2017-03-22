@@ -1,0 +1,19 @@
+{
+  "name": "document-management-system",
+  "version": "0.0.0",
+  "description": "Full stack document management system, complete with roles and privileges.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-ooyewole/Document-Mangement-System.git"
+  },
+  "author": "Olufemi Oyewole",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-ooyewole/Document-Mangement-System/issues"
+  },
+  "homepage": "https://github.com/andela-ooyewole/Document-Mangement-System#readme"
+}
