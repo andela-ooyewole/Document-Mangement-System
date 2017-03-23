@@ -1,0 +1,9 @@
+{
+  "name": "Document-Mangement-System",
+  "description": "Full stack document management system, complete with roles and privileges.",
+  "scripts": {},
+  "env": {},
+  "formation": {},
+  "addons": [],
+  "buildpacks": []
+}
