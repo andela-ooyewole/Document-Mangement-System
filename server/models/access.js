@@ -16,8 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      associate: () => {
+      associate: (models) => {
         // associations can be defined here
+        access.belongsTo(models.document, {
+          foreignKey: 'documentId',
+          as: 'document',
+          onDelete: 'CASCADE',
+        });
       }
     }
   });

@@ -25,8 +25,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      associate: () => {
+      associate: (models) => {
         // associations can be defined here
+        document.hasMany(models.access, {
+          foreignKey: 'documentId',
+          as: 'accesses'
+        });
+        document.belongsTo(models.user, {
+          foreignKey: 'userId',
+          as: 'user'
+        });
       }
     }
   });
