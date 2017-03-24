@@ -1,6 +1,8 @@
+/* eslint-disable */
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+/* eslint-enable */
 
 // Set up the express app
 const app = express();

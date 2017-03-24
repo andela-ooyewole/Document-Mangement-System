@@ -1,4 +1,6 @@
+/* eslint-disable */
 require('dotenv').config();
+/* eslint-enable */
 
 const envs = {
   development: {
