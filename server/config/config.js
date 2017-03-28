@@ -11,9 +11,9 @@ const envs = {
     dialect: 'postgres'
   },
   test: {
-    username: process.env.TEST_DB_USER,
-    password: process.env.TEST_DB_PASSWORD,
-    database: process.env.TEST_DB_NAME,
+    username: 'postgres',
+    password: '',
+    database: 'dms_test',
     host: '127.0.0.1',
     dialect: 'postgres'
   }

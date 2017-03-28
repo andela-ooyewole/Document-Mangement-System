@@ -8,7 +8,7 @@ gulp.task('start', shell.task([
 ]));
 
 gulp.task('test', shell.task([
-  'mocha server/tests/api/user.spec.js --compilers js:babel-register',
+  'NODE_ENV=test mocha server/tests/api/user.spec.js --compilers js:babel-register',
 ]));
 
 gulp.task('cover', shell.task([

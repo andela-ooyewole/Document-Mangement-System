@@ -1,8 +1,17 @@
+/* eslint-disable */
+/* eslint-enable */
 import model from '../models/';
 
 const user = model.user;
 
 export default {
+
+  /**
+   * Create a new user
+   * @param {Object} req - Request object
+   * @param {Object} res - Response object
+   * @returns {Object} Response object
+   */
   create(req, res) {
     return user
       .findOne({
