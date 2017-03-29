@@ -1,4 +1,6 @@
+/* eslint-disable */
 import faker from 'faker';
+/* eslint-enable */
 
 export default {
   user: {

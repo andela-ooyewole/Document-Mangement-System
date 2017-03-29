@@ -1,9 +1,9 @@
 /* eslint-disable */
-/* eslint-enable */
 import supertest from 'supertest';
 import expect from 'expect';
 import app from '../../app';
 import data from '../helper/helper';
+/* eslint-enable */
 
 // This agent refers to PORT where program is runninng.
 const server = supertest.agent(app);

@@ -1,6 +1,6 @@
 /* eslint-disable */
-/* eslint-enable */
 import model from '../models/';
+/* eslint-enable */
 
 const user = model.user;
 

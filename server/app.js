@@ -1,10 +1,10 @@
 /* eslint-disable */
-/* eslint-enable */
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import Routes from './routes';
+/* eslint-enable */
 
 // Set up the express app
 const app = express();
