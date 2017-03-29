@@ -8,10 +8,14 @@ const config = require('./../config/config');
 const basename = path.basename(module.filename);
 const db = {};
 
-const sequelize = new Sequelize(
-  config.database, config.username, config.password, config
-);
-
+let sequelize;
+if (process.env.NODE_ENV === 'production') {
+  sequelize = new Sequelize(config.url, config);
+} else {
+  sequelize = new Sequelize(
+    config.database, config.username, config.password, config
+  );
+}
 fs
   .readdirSync(__dirname)
   .filter(file =>
