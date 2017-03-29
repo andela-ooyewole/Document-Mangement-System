@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const config = require('./../configs/config');
+const config = require('./../config/config');
 /* eslint-enable */
 
 const basename = path.basename(module.filename);
