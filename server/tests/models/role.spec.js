@@ -12,18 +12,22 @@ const newRole = data.newRole;
 describe('Roles Model', () => {
   let role;
 
+  Role.create(newRole);
+
   describe('Create Role', () => {
     it('should be able to create a role', () => {
       expect(Role).toExist();
       expect(typeof Role).toEqual('object');
     });
 
-    it('should create new role', (done) => {
-      Role.create(newRole)
-        .then((createdRole) => {
-          role = createdRole;
-          done();
-          expect(role).toExist();
+    it('should create new role', () => {
+      Role.findOne({
+        where: {
+          title: newRole.title
+        }
+      })
+        .then((foundUser) => {
+          expect(foundUser).toExist();
         });
     });
   });

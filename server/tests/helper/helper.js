@@ -35,6 +35,16 @@ export default {
     password: faker.internet.password(),
     roleId: 2
   },
+  sharedDoc: {
+    title: faker.company.catchPhrase(),
+    content: faker.lorem.paragraph(),
+    access: 'public',
+  },
+  shared: {
+    email: faker.internet.email(),
+    canEdit: true,
+    documentId: 1
+  },
   invalid: {
     emailEmpty: {
       firstname: 'Franklin',
