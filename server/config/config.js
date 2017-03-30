@@ -4,22 +4,13 @@ require('dotenv').config();
 
 const envs = {
   development: {
-    username: process.env.DEV_DB_USER,
-    password: process.env.DEV_DB_PASSWORD,
-    database: process.env.DEV_DB_NAME,
-    host: '127.0.0.1',
-    dialect: 'postgres'
+    url: process.env.DEV_ENV_URL
   },
   test: {
-    username: 'postgres',
-    password: '',
-    database: 'dms_test',
-    host: '127.0.0.1',
-    dialect: 'postgres'
+    url: 'postgres://postgres:null@127.0.0.1:5432/dms_test'
   },
   production: {
-    url: process.env.DATABASE_URL,
-    dialect: 'postgres'
+    url: process.env.DATABASE_URL
   }
 };
 
