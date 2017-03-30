@@ -1,4 +1,6 @@
+/* eslint-disable */
 import bcrypt from 'bcryptjs';
+/* eslint-enable */
 
 export default (sequelize, DataTypes) => {
   const user = sequelize.define('user', {

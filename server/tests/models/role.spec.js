@@ -10,8 +10,6 @@ const Role = model.role;
 const newRole = data.newRole;
 
 describe('Roles Model', () => {
-  let role;
-
   Role.create(newRole);
 
   describe('Create Role', () => {
