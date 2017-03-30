@@ -11,6 +11,9 @@ export default {
     password: 'dairy',
     roleId: 1
   },
+  newRole: {
+    title: faker.random.word(),
+  },
   user: {
     username: faker.internet.userName(),
     email: faker.internet.email(),

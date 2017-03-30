@@ -12,8 +12,8 @@ describe('User Model', () => {
   let user;
 
   describe('Create User', () => {
-    it('should create a user with an object', () => {
-      expect(User).toExist;
+    it('should be able to create a user', () => {
+      expect(User).toExist();
       expect(typeof User).toEqual('object');
     });
 
@@ -22,12 +22,8 @@ describe('User Model', () => {
         .then((createdUser) => {
           user = createdUser;
           done();
+          expect(user).toExist();
         });
-    });
-
-    it('created new user should exist', () => {
-      expect(user).toExist();
-      expect(user).toExist('email');
     });
 
     it('created user should have firstname,lastname and email', () => {
