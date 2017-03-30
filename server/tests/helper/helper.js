@@ -14,7 +14,20 @@ export default {
   newRole: {
     title: faker.random.word(),
   },
+  publicDoc: {
+    title: faker.random.word(),
+    content: faker.lorem.paragraph(),
+    access: 'public',
+  },
   user: {
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
+  },
+  user2: {
     username: faker.internet.userName(),
     email: faker.internet.email(),
     firstname: faker.name.firstName(),

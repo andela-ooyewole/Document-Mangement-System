@@ -7,6 +7,7 @@ import data from '../helper/helper';
 /* eslint no-unused-expressions: "off"*/
 
 const User = model.user;
+const newUser = data.adminUser;
 
 describe('User Model', () => {
   let user;
@@ -18,7 +19,7 @@ describe('User Model', () => {
     });
 
     it('should create new user', (done) => {
-      User.create(data.adminUser)
+      User.create(newUser)
         .then((createdUser) => {
           user = createdUser;
           done();
@@ -27,14 +28,14 @@ describe('User Model', () => {
     });
 
     it('created user should have firstname,lastname and email', () => {
-      expect(user.firstname).toEqual(data.adminUser.firstname);
-      expect(user.lastname).toEqual(data.adminUser.lastname);
-      expect(user.username).toEqual(data.adminUser.username);
-      expect(user.email).toEqual(data.adminUser.email);
+      expect(user.firstname).toEqual(newUser.firstname);
+      expect(user.lastname).toEqual(newUser.lastname);
+      expect(user.username).toEqual(newUser.username);
+      expect(user.email).toEqual(newUser.email);
     });
 
     it('should create a user with hashed password', () => {
-      expect(user.password).toNotEqual(data.adminUser.password);
+      expect(user.password).toNotEqual(newUser.password);
     });
   });
 
@@ -64,7 +65,7 @@ describe('User Model', () => {
     });
 
     it('ensures a user can only be created once', (done) => {
-      User.create(data.adminUser)
+      User.create(newUser)
         .catch((error) => {
           expect(/SequelizeUniqueConstraintError/.test(error.name)).toBeTruthy;
           done();
@@ -96,7 +97,7 @@ describe('User Model', () => {
     it('should be equal when compared', () => {
       User.findById(user.id)
         .then((foundUser) => {
-          expect(foundUser.verifyPassword(data.adminUser.password)).toBeTruthy;
+          expect(foundUser.verifyPassword(newUser.password)).toBeTruthy;
         });
     });
 

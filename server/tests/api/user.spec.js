@@ -13,7 +13,7 @@ describe('User API', () => {
     it('should create new user', (done) => {
       server
         .post('/users')
-        .send(data.user)
+        .send(data.user2)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           expect(res.status).toEqual(201);
