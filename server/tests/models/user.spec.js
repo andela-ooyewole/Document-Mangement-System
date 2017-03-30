@@ -74,14 +74,6 @@ describe('User Model', () => {
           done();
         });
     });
-
-    it('ensures a username can only be created once', (done) => {
-      User.create(data.invalid.uniqueUsername)
-        .catch((error) => {
-          expect(/SequelizeUniqueConstraintError/.test(error.name)).toBeTruthy;
-          done();
-        });
-    });
   });
 
   describe('Email Validation', () => {

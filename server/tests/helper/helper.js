@@ -59,13 +59,6 @@ export default {
       email: 'femioyewole@hotmail.com',
       password: '1234',
     },
-    uniqueUsername: {
-      firstname: 'femi',
-      lastname: 'Oyewole',
-      username: 'femioyewole',
-      email: 'femioyewole@hotmail.com',
-      password: '1234',
-    },
     invalidEmail: {
       firstname: 'Franklin',
       lastname: 'Oyewole',

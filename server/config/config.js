@@ -7,7 +7,7 @@ const envs = {
     url: process.env.DEV_ENV_URL
   },
   test: {
-    url: 'postgres://postgres:null@127.0.0.1:5432/dms_test'
+    url: 'postgres://postgres:null@localhost:5432/dms_test'
   },
   production: {
     url: process.env.DATABASE_URL
