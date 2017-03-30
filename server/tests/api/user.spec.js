@@ -9,11 +9,11 @@ import data from '../helper/helper';
 const server = supertest.agent(app);
 
 describe('User API', () => {
-  describe('Create User', () => {
+  describe('POST/ Create User', () => {
     it('should create new user', (done) => {
       server
         .post('/users')
-        .send(data.user)
+        .send(data.user2)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           expect(res.status).toEqual(201);

@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Full stack document management system, complete with roles and privileges.",
   "main": "index.js",
+  "engines": {
+    "node": "6.9.4"
+  },
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
@@ -25,6 +28,7 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.24.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "cors": "^2.8.1",
     "dotenv": "^4.0.0",

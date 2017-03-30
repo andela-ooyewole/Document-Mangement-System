@@ -8,14 +8,8 @@ const config = require('./../config/config');
 const basename = path.basename(module.filename);
 const db = {};
 
-let sequelize;
-if (process.env.NODE_ENV === 'production') {
-  sequelize = new Sequelize(config.url, config);
-} else {
-  sequelize = new Sequelize(
-    config.database, config.username, config.password, config
-  );
-}
+const sequelize = new Sequelize(config.url, config);
+
 fs
   .readdirSync(__dirname)
   .filter(file =>
@@ -36,4 +30,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;
