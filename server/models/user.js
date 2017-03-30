@@ -1,4 +1,6 @@
-module.exports = (sequelize, DataTypes) => {
+import bcrypt from 'bcryptjs';
+
+export default (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
@@ -60,6 +62,22 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'roleId',
           as: 'role'
         });
+      }
+    },
+    instanceMethods: {
+      /**
+       * verify plain password against user's hashed password
+       * @method
+       * @param {String} password password to be encrypted
+       * @returns {Boolean} Validity of passowrd
+       */
+      verifyPassword(password) {
+        return bcrypt.compareSync(password, this.password);
+      }
+    },
+    hooks: {
+      beforeCreate: (newUser) => {
+        newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
       }
     }
   });
