@@ -8,7 +8,6 @@ import data from '../helper/helper';
 
 const User = model.user;
 const Document = model.document;
-// const adminUser = newData.adminUser;
 const user = data.user;
 const publicDocument = data.publicDoc;
 

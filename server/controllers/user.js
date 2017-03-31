@@ -1,8 +1,11 @@
 /* eslint-disable */
 import model from '../models/';
 /* eslint-enable */
+// import helper from './helper/';
 
 const user = model.user;
+// const document = model.document;
+// const role = model.role;
 
 export default {
 
@@ -29,8 +32,8 @@ export default {
         user
           .create(req.body)
           .then(newUser => res
-              .status(201)
-              .send({ newUser, message: 'User created successfully' }))
+            .status(201)
+            .send({ newUser, message: 'User created successfully' }))
           .catch(error => res.status(400).send({
             error, message: `Error creating ${req.body.name}`
           }));

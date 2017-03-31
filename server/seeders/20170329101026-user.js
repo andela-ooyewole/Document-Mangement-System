@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 module.exports = {
   up(queryInterface) {
     /*
@@ -15,7 +17,7 @@ module.exports = {
       email: 'olufemi.oyewole@andela.com',
       firstname: 'Olufemi',
       lastname: 'Oyewole',
-      password: 'password',
+      password: bcrypt.hashSync('password', bcrypt.genSaltSync(10)),
       createdAt: new Date(),
       updatedAt: new Date(),
       roleId: 1

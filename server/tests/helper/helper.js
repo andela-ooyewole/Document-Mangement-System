@@ -35,12 +35,21 @@ export default {
     password: faker.internet.password(),
     roleId: 2
   },
-  sharedDoc: {
+  user3: {
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
+  },
+  sharedDocument: {
     title: faker.company.catchPhrase(),
     content: faker.lorem.paragraph(),
     access: 'public',
+    userId: 1
   },
-  shared: {
+  access1: {
     email: faker.internet.email(),
     canEdit: true,
     documentId: 1
