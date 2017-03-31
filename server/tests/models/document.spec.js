@@ -5,52 +5,66 @@ import data from '../helper/helper';
 /* eslint-enable */
 
 /* eslint no-unused-expressions: "off"*/
-
+const Role = model.role;
+const role = data.exampleRole;
 const User = model.user;
+const user = data.exampleUser;
 const Document = model.document;
-const user = data.user;
 const publicDocument = data.publicDoc;
 
 describe('Document Model', () => {
-  let docData;
-  let userdata;
+  let newDocument;
+  let newUser;
 
-  User.create(user)
-    .then((newUser) => {
-      userdata = newUser;
-      publicDocument.userId = userdata.id;
-    });
+  before((done) => {
+    Role.create(role);
+    User.create(user)
+      .then((createdUser) => {
+        newUser = createdUser;
+        publicDocument.userId = newUser.id;
+        done();
+      });
+  });
+
+  after((done) => {
+    Document.destroy({ where: { id: newDocument.id } });
+    User.destroy({ where: { id: newUser.id } });
+    Role.destroy({ where: { id: role.id } });
+    done();
+  });
 
   describe('Create Document', () => {
     it('should create new document', (done) => {
       Document.create(publicDocument)
-        .then((newDocument) => {
-          docData = newDocument;
+        .then((createdDocument) => {
+          newDocument = createdDocument;
           done();
         });
     });
+
     it('created new document should exist', () => {
-      expect(docData).toExist();
-      expect(typeof docData).toEqual('object');
-      expect(docData).toExist('title');
-      expect(docData).toExist('content');
+      expect(newDocument).toExist();
+      expect(typeof newDocument).toEqual('object');
+      expect(newDocument).toExist('title');
+      expect(newDocument).toExist('content');
     });
+
     it('created new document should have name, email', () => {
-      expect(docData.title).toEqual(publicDocument.title);
-      expect(docData.content).toEqual(publicDocument.content);
-      expect(docData.access).toEqual(publicDocument.access);
+      expect(newDocument.title).toEqual(publicDocument.title);
+      expect(newDocument.content).toEqual(publicDocument.content);
+      expect(newDocument.access).toEqual(publicDocument.access);
     });
 
     it('should create a document with correct userId', () => {
-      expect(docData.userId).toEqual(userdata.id);
+      expect(newDocument.userId).toEqual(newUser.id);
     });
 
     it('should create a document with published date', () => {
-      expect(docData.createdAt).toExist();
+      expect(newDocument.createdAt).toExist();
     });
 
     it('should create a document with access set to public', () => {
-      expect(docData.access).toEqual('public');
+      expect(newDocument.access).toEqual('public');
     });
   });
 
@@ -63,6 +77,7 @@ describe('Document Model', () => {
           done();
         });
     });
+
     it('requires unique title field to create a document', (done) => {
       Document.create(publicDocument)
         .catch((error) => {

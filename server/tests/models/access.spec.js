@@ -5,47 +5,60 @@ import data from '../helper/helper';
 /* eslint-enable */
 
 /* eslint no-unused-expressions: "off"*/
+const Role = model.role;
+const role = data.adminRole;
 const User = model.user;
+const user = data.adminUser;
 const Access = model.access;
+const access = data.exampleAccess;
 const Document = model.document;
-const sharedDocument = data.sharedDocument;
-const access1 = data.access1;
-const user = data.user3;
+const document = data.exampleDocument;
 
 describe('Access Model', () => {
-  let documentAccess;
-  let document;
+  let newAccess;
+  let newDocument;
 
-  User.create(user);
-
-  Document.create(sharedDocument)
-    .then((newDoc) => {
-      document = newDoc;
-      access1.userId = document.id;
+  before((done) => {
+    Role.create(role);
+    User.create(user).then(() => {
+      Document.create(document)
+      .then((createdDocument) => {
+        newDocument = createdDocument;
+        access.documentId = newDocument.id;
+        done();
+      });
     });
+  });
+
+  after((done) => {
+    Document.destroy({ where: { userId: user.id } });
+    User.destroy({ where: { email: user.email } });
+    Role.destroy({ where: { id: role.id } });
+    done();
+  });
 
   describe('Create shared access for a document', () => {
     it('should create a document access', (done) => {
-      Access.create(access1)
-        .then((access) => {
-          documentAccess = access;
+      Access.create(access)
+        .then((createdAccess) => {
+          newAccess = createdAccess;
           done();
         });
     });
 
     it('document access data should exist', () => {
-      expect(documentAccess).toExist();
-      expect(typeof documentAccess).toEqual('object');
-      expect(documentAccess).toExist('email');
+      expect(newAccess).toExist();
+      expect(typeof newAccess).toEqual('object');
+      expect(newAccess).toExist('email');
     });
 
     it('created access should have name, email', () => {
-      expect(documentAccess.email).toEqual(access1.email);
-      expect(documentAccess.documentId).toEqual(access1.documentId);
+      expect(newAccess.email).toEqual(access.email);
+      expect(newAccess.documentId).toEqual(access.documentId);
     });
 
     it('should its canEdit option activated', () => {
-      expect(documentAccess.canEdit).toExist();
+      expect(newAccess.canEdit).toExist();
     });
   });
 

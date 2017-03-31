@@ -6,11 +6,24 @@ import data from '../helper/helper';
 
 /* eslint no-unused-expressions: "off"*/
 
+const Role = model.role;
+const role = data.adminRole;
 const User = model.user;
-const newUser = data.adminUser;
+const user = data.adminUser;
 
 describe('User Model', () => {
-  let user;
+  let newUser;
+
+  before((done) => {
+    Role.create(role);
+    done();
+  });
+
+  after((done) => {
+    User.destroy({ where: { email: user.email } });
+    Role.destroy({ where: { id: role.id } });
+    done();
+  });
 
   describe('Create User', () => {
     it('should be able to create a user', () => {
@@ -19,23 +32,23 @@ describe('User Model', () => {
     });
 
     it('should create new user', (done) => {
-      User.create(newUser)
+      User.create(user)
         .then((createdUser) => {
-          user = createdUser;
+          newUser = createdUser;
           done();
-          expect(user).toExist();
+          expect(newUser).toExist();
         });
     });
 
     it('created user should have firstname,lastname and email', () => {
-      expect(user.firstname).toEqual(newUser.firstname);
-      expect(user.lastname).toEqual(newUser.lastname);
-      expect(user.username).toEqual(newUser.username);
-      expect(user.email).toEqual(newUser.email);
+      expect(newUser.firstname).toEqual(user.firstname);
+      expect(newUser.lastname).toEqual(user.lastname);
+      expect(newUser.username).toEqual(user.username);
+      expect(newUser.email).toEqual(user.email);
     });
 
     it('should create a user with hashed password', () => {
-      expect(user.password).toNotEqual(newUser.password);
+      expect(newUser.password).toNotEqual(user.password);
     });
   });
 
@@ -65,7 +78,7 @@ describe('User Model', () => {
     });
 
     it('ensures a user can only be created once', (done) => {
-      User.create(newUser)
+      User.create(user)
         .catch((error) => {
           expect(/SequelizeUniqueConstraintError/.test(error.name)).toBeTruthy;
           done();
@@ -95,9 +108,9 @@ describe('User Model', () => {
 
   describe('Password Validation', () => {
     it('should be equal when compared', () => {
-      User.findById(user.id)
+      User.findById(newUser.id)
         .then((foundUser) => {
-          expect(foundUser.verifyPassword(newUser.password)).toBeTruthy;
+          expect(foundUser.verifyPassword(user.password)).toBeTruthy;
         });
     });
 

@@ -2,13 +2,31 @@
 import supertest from 'supertest';
 import expect from 'expect';
 import app from '../../app';
+import model from '../../models/';
+import data from '../helper/helper';
 /* eslint-enable */
 
 // This agent refers to PORT where program is runninng.
 const server = supertest.agent(app);
+const Role = model.role;
+const role = data.adminRole;
+const User = model.user;
+const user = data.adminUser;
 
 describe('Authentication', () => {
-  let user;
+  let response;
+
+  before((done) => {
+    Role.create(role);
+    User.create(user);
+    done();
+  });
+
+  after((done) => {
+    User.destroy({ where: { email: user.email } });
+    Role.destroy({ where: { id: role.id } });
+    done();
+  });
 
   describe('GET/ Home page', () => {
     it('should show the home page', (done) => {
@@ -26,9 +44,9 @@ describe('Authentication', () => {
     it('should login user', (done) => {
       server
         .post('/users/login')
-        .send({ email: 'olufemi.oyewole@andela.com', password: 'password' })
+        .send({ email: user.email, password: user.password })
         .end((err, res) => {
-          user = res.body;
+          response = res.body;
           expect(res.status).toEqual(200);
           expect(res.body.message).toEqual('Authentication successfull.');
           done();
@@ -36,14 +54,14 @@ describe('Authentication', () => {
     });
 
     it('logged in user should have a token', (done) => {
-      expect(user.token).toExist();
+      expect(response.token).toExist();
       done();
     });
 
     it('should return Wrong Password login user', (done) => {
       server
         .post('/users/login')
-        .send({ email: 'olufemi.oyewole@andela.com', password: 'notPassword' })
+        .send({ email: user.email, password: 'notPassword' })
         .end((err, res) => {
           expect(res.status).toEqual(401);
           expect(res.body.message).toEqual(
@@ -80,7 +98,7 @@ describe('Authentication', () => {
     it('should not authenticate user without password', (done) => {
       server
         .post('/users/login')
-        .send({ email: 'olufemi.oyewole@andela.com' })
+        .send({ email: user.email })
         .end((err, res) => {
           expect(res.status).toEqual(400);
           expect(res.body.message).toEqual(

@@ -1,7 +1,7 @@
 /* eslint-disable */
-/* eslint-enable */
 import model from '../models/';
 import helper from './helper/';
+/* eslint-enable */
 
 const document = model.document;
 const Roles = model.role;
@@ -11,13 +11,12 @@ export default {
     return document
       .create({
         title: req.body.title,
-        docContent: req.body.docContent,
-        viewAccess: req.body.viewAccess,
-        userId: req.body.userId,
-        role: req.body.role
+        content: req.body.content,
+        access: req.body.access,
+        userId: req.body.userId
       })
-      .then(foundDocument => res.status(201).send({
-        foundDocument,
+      .then(newDocument => res.status(201).send({
+        newDocument,
         message: 'Document created successfully.'
       }))
       .catch(error => res.status(400).send({
@@ -58,7 +57,7 @@ export default {
     .findAll({
       where: {
         $or: [
-          { viewAccess: 'public' },
+          { access: 'public' },
           {
             role: String(req.decoded.data.roleId)
           },

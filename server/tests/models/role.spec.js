@@ -7,10 +7,23 @@ import data from '../helper/helper';
 /* eslint no-unused-expressions: "off"*/
 
 const Role = model.role;
-const newRole = data.newRole;
+const role = data.exampleRole;
 
 describe('Roles Model', () => {
-  Role.create(newRole);
+  let newRole;
+
+
+  before((done) => {
+    Role.create(role).then((createdRole) => {
+      newRole = createdRole;
+      done();
+    });
+  });
+
+  after((done) => {
+    Role.destroy({ where: { id: newRole.id } });
+    done();
+  });
 
   describe('Create Role', () => {
     it('should be able to create a role', () => {
@@ -21,7 +34,7 @@ describe('Roles Model', () => {
     it('should create new role', () => {
       Role.findOne({
         where: {
-          title: newRole.title
+          title: role.title
         }
       })
         .then((foundUser) => {
@@ -39,7 +52,7 @@ describe('Roles Model', () => {
         });
     });
     it('ensures a role can only be created once', (done) => {
-      Role.create(newRole)
+      Role.create(role)
         .catch((error) => {
           expect(/SequelizeUniqueConstraintError/.test(error.name)).toBeTruthy;
           done();

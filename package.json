@@ -9,8 +9,9 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
-    "coveralls": "gulp coveralls",
-    "db:init": "gulp db:init"
+    "tests": "gulp tests",
+    "db:migrate": "gulp db:migrate",
+    "db:seed": "gulp db:seed"
   },
   "repository": {
     "type": "git",
