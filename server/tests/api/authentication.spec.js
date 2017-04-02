@@ -14,18 +14,20 @@ const User = model.user;
 const user = data.adminUser;
 
 describe('Authentication', () => {
-  let response;
+  let newTokenRes;
 
   before((done) => {
-    Role.create(role);
-    User.create(user);
-    done();
+    Role.create(role)
+      .then(() => User.create(user)
+        .then(() => done())
+      );
   });
 
   after((done) => {
-    User.destroy({ where: { email: user.email } });
-    Role.destroy({ where: { id: role.id } });
-    done();
+    User.destroy({ where: { email: user.email } })
+      .then(() => Role.destroy({ where: { id: role.id } })
+        .then(() => done())
+      );
   });
 
   describe('GET/ Home page', () => {
@@ -46,7 +48,7 @@ describe('Authentication', () => {
         .post('/users/login')
         .send({ email: user.email, password: user.password })
         .end((err, res) => {
-          response = res.body;
+          newTokenRes = res.body;
           expect(res.status).toEqual(200);
           expect(res.body.message).toEqual('Authentication successfull.');
           done();
@@ -54,7 +56,7 @@ describe('Authentication', () => {
     });
 
     it('logged in user should have a token', (done) => {
-      expect(response.token).toExist();
+      expect(newTokenRes.token).toExist();
       done();
     });
 

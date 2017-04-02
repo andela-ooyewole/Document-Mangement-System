@@ -17,20 +17,22 @@ describe('Document Model', () => {
   let newUser;
 
   before((done) => {
-    Role.create(role);
-    User.create(user)
-      .then((createdUser) => {
-        newUser = createdUser;
-        publicDocument.userId = newUser.id;
-        done();
-      });
+    Role.create(role).then(() => {
+      User.create(user)
+        .then((createdUser) => {
+          newUser = createdUser;
+          publicDocument.userId = newUser.id;
+          done();
+        });
+    });
   });
 
   after((done) => {
-    Document.destroy({ where: { id: newDocument.id } });
-    User.destroy({ where: { id: newUser.id } });
-    Role.destroy({ where: { id: role.id } });
-    done();
+    Document.destroy({ where: { id: newDocument.id } }).then(() => {
+      User.destroy({ where: { id: newUser.id } }).then(() => {
+        Role.destroy({ where: { id: role.id } }).then(() => done());
+      });
+    });
   });
 
   describe('Create Document', () => {

@@ -19,13 +19,14 @@ describe('Access Model', () => {
   let newDocument;
 
   before((done) => {
-    Role.create(role);
-    User.create(user).then(() => {
-      Document.create(document)
-      .then((createdDocument) => {
-        newDocument = createdDocument;
-        access.documentId = newDocument.id;
-        done();
+    Role.create(role).then(() => {
+      User.create(user).then(() => {
+        Document.create(document)
+          .then((createdDocument) => {
+            newDocument = createdDocument;
+            access.documentId = newDocument.id;
+            done();
+          });
       });
     });
   });

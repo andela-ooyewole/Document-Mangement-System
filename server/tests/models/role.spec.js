@@ -21,8 +21,8 @@ describe('Roles Model', () => {
   });
 
   after((done) => {
-    Role.destroy({ where: { id: newRole.id } });
-    done();
+    Role.destroy({ where: { id: newRole.id } })
+      .then(() => done());
   });
 
   describe('Create Role', () => {

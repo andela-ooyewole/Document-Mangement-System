@@ -59,9 +59,6 @@ export default {
         $or: [
           { access: 'public' },
           {
-            role: String(req.decoded.data.roleId)
-          },
-          {
             userId: req.params.id
           }
         ]
