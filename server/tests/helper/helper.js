@@ -20,7 +20,15 @@ export default {
     password: 'password',
     roleId: 1
   },
-  exampleUser: {
+  exampleUser1: {
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
+  },
+  exampleUser2: {
     username: faker.internet.userName(),
     email: faker.internet.email(),
     firstname: faker.name.firstName(),

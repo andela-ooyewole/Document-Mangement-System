@@ -8,7 +8,7 @@ import data from '../helper/helper';
 const Role = model.role;
 const role = data.exampleRole;
 const User = model.user;
-const user = data.exampleUser;
+const user = data.exampleUser1;
 const Document = model.document;
 const publicDocument = data.publicDoc;
 

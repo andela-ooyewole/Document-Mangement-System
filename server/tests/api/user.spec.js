@@ -11,7 +11,7 @@ const server = supertest.agent(app);
 const Role = model.role;
 const role = data.exampleRole;
 const User = model.user;
-const user = data.exampleUser;
+const user = data.exampleUser1;
 
 describe('User API', () => {
   before((done) => {
