@@ -1,7 +1,7 @@
 /* eslint-disable */
 import controller from '../controllers';
-/* eslint-enable */
 import middleware from '../middlewares';
+/* eslint-enable */
 
 const verify = middleware.authentication.verifyToken;
 const adminAccess = middleware.authentication.adminAccess;

@@ -6,8 +6,6 @@ import model from '../../models/';
 import data from '../helper/helper';
 /* eslint-enable */
 
-process.env.NODE_ENV = 'test';
-
 // This agent refers to PORT where program is runninng.
 const server = supertest.agent(app);
 const Document = model.document;

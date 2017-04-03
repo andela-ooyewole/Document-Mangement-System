@@ -11,6 +11,9 @@ export default {
     id: 2,
     title: faker.random.word(),
   },
+  exampleRole1: {
+    title: faker.random.word(),
+  },
   adminUser: {
     id: 1,
     username: faker.internet.userName(),

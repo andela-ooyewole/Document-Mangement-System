@@ -4,7 +4,7 @@ import helper from './helper/';
 /* eslint-enable */
 
 const document = model.document;
-const Roles = model.role;
+const role = model.role;
 
 export default {
   create(req, res) {
@@ -78,7 +78,7 @@ export default {
     }));
   },
   update(req, res) {
-    Roles.findById(req.decoded.data.roleId)
+    role.findById(req.decoded.data.roleId)
     .then(() => document
         .find({ where: {
           id: req.params.id } })

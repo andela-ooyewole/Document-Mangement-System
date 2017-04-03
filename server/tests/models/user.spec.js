@@ -15,14 +15,13 @@ describe('User Model', () => {
   let newUser;
 
   before((done) => {
-    Role.create(role);
-    done();
+    Role.create(role).then(() => done());
   });
 
   after((done) => {
-    User.destroy({ where: { email: user.email } });
-    Role.destroy({ where: { id: role.id } });
-    done();
+    User.destroy({ where: { email: user.email } }).then(() => {
+      Role.destroy({ where: { id: role.id } }).then(() => done());
+    });
   });
 
   describe('Create User', () => {

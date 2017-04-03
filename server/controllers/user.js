@@ -1,8 +1,8 @@
 /* eslint-disable */
 import jwt from 'jsonwebtoken';
 import model from '../models/';
-/* eslint-enable */
 import helper from './helper/';
+/* eslint-enable */
 
 const user = model.user;
 const document = model.document;

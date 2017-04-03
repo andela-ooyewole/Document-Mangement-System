@@ -24,9 +24,9 @@ export default {
   },
 
   adminAccess(req, res, next) {
-    model.Roles.findById(req.decoded.data.roleId)
+    model.role.findById(req.decoded.data.roleId)
       .then((foundRole) => {
-        if (foundRole.title.toLowerCase() === 'administrator') {
+        if (foundRole.title === 'Administrator') {
           next();
         } else {
           return res.status(401)
