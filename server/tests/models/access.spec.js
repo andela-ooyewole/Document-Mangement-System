@@ -32,10 +32,11 @@ describe('Access Model', () => {
   });
 
   after((done) => {
-    Document.destroy({ where: { userId: user.id } });
-    User.destroy({ where: { email: user.email } });
-    Role.destroy({ where: { id: role.id } });
-    done();
+    Document.destroy({ where: { userId: user.id } }).then(() => {
+      User.destroy({ where: { email: user.email } }).then(() => {
+        Role.destroy({ where: { id: role.id } }).then(() => done());
+      });
+    });
   });
 
   describe('Create shared access for a document', () => {

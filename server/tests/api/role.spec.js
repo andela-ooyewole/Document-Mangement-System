@@ -8,13 +8,13 @@ import model from '../../models/';
 
 // This agent refers to PORT where program is runninng.
 const server = supertest.agent(app);
+const Role = model.role;
+const role1 = data.adminRole;
+const role2 = data.exampleRole;
 const role = data.exampleRole1;
 const User = model.user;
 const adminUser = data.adminUser;
 const user2 = data.exampleUser2;
-const Role = model.role;
-const role1 = data.adminRole;
-const role2 = data.exampleRole;
 
 describe('Roles API', () => {
   let adminUserRes;
