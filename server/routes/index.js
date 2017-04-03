@@ -1,10 +1,10 @@
 /* eslint-disable */
-/* eslint-enable */
 import authRoute from './authentication';
 import userRoute from './user';
 import documentRoute from './document';
 import searchRoute from './search';
 import roleRoute from './role';
+/* eslint-enable */
 
 const Routes = (app) => {
   authRoute(app);

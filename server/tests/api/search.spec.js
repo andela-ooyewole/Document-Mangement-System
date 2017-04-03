@@ -21,8 +21,9 @@ describe('Search API', () => {
   let user2Res;
 
   before((done) => {
-    Role.create(role1);
-    Role.create(role2);
+    Role.create(role1).then(() => {
+      Role.create(role2);
+    });
     server
       .post('/users')
       .send(adminUser)

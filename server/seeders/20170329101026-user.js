@@ -1,4 +1,6 @@
+/* eslint-disable */
 const bcrypt = require('bcryptjs');
+/* eslint-enable */
 
 module.exports = {
   up(queryInterface) {

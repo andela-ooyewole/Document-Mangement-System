@@ -14,6 +14,16 @@ const Routes = (app) => {
     .get(verify, adminAccess, controller.user.list);
 
   app
+    .route('/users/:id')
+    .get(verify, controller.user.retrieve)
+    .put(verify, controller.user.update)
+    .delete(verify, controller.user.destroy);
+
+  app
+    .route('/api/users/:identifier')
+    .get(controller.user.getExistingUser);
+
+  app
     .route('/users/:id/documents')
     .get(verify, controller.user.findUserDocuments);
 };

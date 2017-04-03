@@ -1,5 +1,7 @@
+/* eslint-disable */
 import jwt from 'jsonwebtoken';
 import model from '../models/';
+/* eslint-enable */
 
 const secret = process.env.SECRET || 'demosecret';
 
