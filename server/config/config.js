@@ -10,8 +10,9 @@ const envs = {
     url: 'postgres://postgres:null@localhost:5432/dms_test'
   },
   production: {
-    url: process.env.DATABASE_URL
+    url: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL'
   }
 };
 
-module.exports = envs[process.env.NODE_ENV || 'development'];
+module.exports = envs[process.env.NODE_ENV || 'test'];

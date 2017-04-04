@@ -3,47 +3,66 @@ import faker from 'faker';
 /* eslint-enable */
 
 export default {
+  adminRole: {
+    id: 1,
+    title: 'Administrator'
+  },
+  exampleRole: {
+    id: 2,
+    title: faker.random.word(),
+  },
+  exampleRole1: {
+    title: faker.random.word(),
+  },
   adminUser: {
+    id: 1,
     username: faker.internet.userName(),
     email: faker.internet.email(),
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
-    password: 'dairy',
+    password: 'password',
     roleId: 1
   },
-  newRole: {
-    title: faker.random.word(),
+  exampleUser1: {
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
+  },
+  exampleUser2: {
+    id: 2,
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
+  },
+  exampleUser3: {
+    id: 3,
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    password: faker.internet.password(),
+    roleId: 2
   },
   publicDoc: {
     title: faker.random.word(),
     content: faker.lorem.paragraph(),
-    access: 'public',
+    access: 'public'
   },
-  user: {
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    firstname: faker.name.firstName(),
-    lastname: faker.name.lastName(),
-    password: faker.internet.password(),
-    roleId: 2
-  },
-  user2: {
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    firstname: faker.name.firstName(),
-    lastname: faker.name.lastName(),
-    password: faker.internet.password(),
-    roleId: 2
-  },
-  sharedDoc: {
+  exampleDocument: {
     title: faker.company.catchPhrase(),
     content: faker.lorem.paragraph(),
     access: 'public',
+    userId: 1
   },
-  shared: {
+  exampleAccess: {
     email: faker.internet.email(),
-    canEdit: true,
-    documentId: 1
+    canEdit: true
   },
   invalid: {
     emailEmpty: {

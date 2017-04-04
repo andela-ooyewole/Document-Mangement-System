@@ -5,46 +5,66 @@ import data from '../helper/helper';
 /* eslint-enable */
 
 /* eslint no-unused-expressions: "off"*/
-
+const Role = model.role;
+const role = data.adminRole;
+const User = model.user;
+const user = data.adminUser;
 const Access = model.access;
+const access = data.exampleAccess;
 const Document = model.document;
-const doc = data.sharedDoc;
-const sharedDoc = data.shared;
+const document = data.exampleDocument;
 
-describe('Document Model', () => {
-  let docData;
-  let sharedData;
+describe('Access Model', () => {
+  let newAccess;
+  let newDocument;
 
-  Document.create(doc)
-    .then((newDoc) => {
-      docData = newDoc;
-      sharedDoc.userId = docData.id;
-    });
-
-  describe('Create Document', () => {
-    it('should share document', (done) => {
-      Access.create(sharedDoc)
-        .then((shared) => {
-          sharedData = shared;
-          done();
-        });
-    });
-    it('shared document data should exist', () => {
-      expect(sharedData).toExist();
-      expect(typeof sharedData).toEqual('object');
-      expect(sharedData).toExist('email');
-    });
-    it('created new document should have name, email', () => {
-      expect(sharedData.email).toEqual(sharedDoc.email);
-      expect(sharedData.documentId).toEqual(sharedDoc.documentId);
-    });
-
-    it('should share document with canEdit access set', () => {
-      expect(sharedData.canEdit).toExist();
+  before((done) => {
+    Role.create(role).then(() => {
+      User.create(user).then(() => {
+        Document.create(document)
+          .then((createdDocument) => {
+            newDocument = createdDocument;
+            access.documentId = newDocument.id;
+            done();
+          });
+      });
     });
   });
 
-  describe('Shaed Model Validation', () => {
+  after((done) => {
+    Document.destroy({ where: { userId: user.id } }).then(() => {
+      User.destroy({ where: { email: user.email } }).then(() => {
+        Role.destroy({ where: { id: role.id } }).then(() => done());
+      });
+    });
+  });
+
+  describe('Create shared access for a document', () => {
+    it('should create a document access', (done) => {
+      Access.create(access)
+        .then((createdAccess) => {
+          newAccess = createdAccess;
+          done();
+        });
+    });
+
+    it('document access data should exist', () => {
+      expect(newAccess).toExist();
+      expect(typeof newAccess).toEqual('object');
+      expect(newAccess).toExist('email');
+    });
+
+    it('created access should have name, email', () => {
+      expect(newAccess.email).toEqual(access.email);
+      expect(newAccess.documentId).toEqual(access.documentId);
+    });
+
+    it('should its canEdit option activated', () => {
+      expect(newAccess.canEdit).toExist();
+    });
+  });
+
+  describe('Shared Model Validation', () => {
     it('requires email field to share a document with', (done) => {
       Access.create(data.invalid.nullEmail)
         .catch((error) => {
@@ -53,6 +73,7 @@ describe('Document Model', () => {
           done();
         });
     });
+
     it('mail can not be empty', () => {
       Access.create(data.invalid.emptyEmail)
         .catch((error) => {

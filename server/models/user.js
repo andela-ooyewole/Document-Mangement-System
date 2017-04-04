@@ -80,6 +80,9 @@ export default (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (newUser) => {
         newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
+      },
+      beforeUpdate: (newUser) => {
+        newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
       }
     }
   });
