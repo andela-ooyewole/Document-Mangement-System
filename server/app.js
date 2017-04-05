@@ -1,16 +1,17 @@
 /* eslint-disable */
 import express from 'express';
+import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
-import cors from 'cors';
+import path from 'path';
 import Routes from './routes';
+import config from '../webpack.config';
 /* eslint-enable */
 
 // Set up the express app
 const app = express();
 const router = express.Router();
-
-app.use(cors());
+const compiler = webpack(config);
 
 // Log requests to the console.
 app.use(logger('dev'));
@@ -22,10 +23,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Serve and receive requests with express router
 app.use('/', router);
 app.set('port', process.env.PORT || 3000);
-app.listen(app.get('port')); // Application listening on port 3000!
 
-// Require our routes into the application.
+// Default route
+app.route('/').get((req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
+
+// Require API Endpoint routes into the application.
 Routes(app);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+
+app.listen(app.get('port')); // Application listening on port 3000!
 
 // Expose the server for supertest to use
 export default app;
