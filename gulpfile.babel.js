@@ -4,7 +4,7 @@ import shell from 'gulp-shell';
 /* eslint-enable */
 
 gulp.task('start', shell.task([
-  'babel-node server/app.js'
+  'nodemon --watch server server/app.js --exec babel-node'
 ]));
 
 gulp.task('tests', ['db:migrate'], shell.task([

@@ -4,6 +4,8 @@ import webpack from 'webpack';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import path from 'path';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import Routes from './routes';
 import config from '../webpack.config';
 /* eslint-enable */
@@ -32,12 +34,12 @@ app.route('/').get((req, res) => {
 // Require API Endpoint routes into the application.
 Routes(app);
 
-app.use(require('webpack-dev-middleware')(compiler, {
+app.use(webpackMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 
 app.listen(app.get('port')); // Application listening on port 3000!
