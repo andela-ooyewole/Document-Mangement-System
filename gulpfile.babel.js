@@ -8,7 +8,7 @@ gulp.task('start', shell.task([
 ]));
 
 gulp.task('tests', ['db:migrate'], shell.task([
-  'NODE_ENV=test babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha server/tests/**/*.spec.js'
+  'NODE_ENV=test babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha ./spec/testSetup.js "./**/tests/**/*.spec.js"'
 ]));
 
 gulp.task('test', shell.task([
