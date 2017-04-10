@@ -35,6 +35,7 @@ app.route('/').get((req, res) => {
 Routes(app);
 
 app.use(webpackMiddleware(compiler, {
+  hot: true,
   noInfo: true,
   publicPath: config.output.publicPath
 }));

@@ -1,19 +1,9 @@
 import React from 'react';
 
-/**
- * HomePage Component
- */
-export default class HomePage {
+const HomePage = () => (
+  <div>
+    <h1>Document Management System!</h1>
+  </div>
+);
 
-  /**
-   * React Render
-   * @return {object} html
-   */
-  render() {
-    return (
-      <div>
-        <h1>Document Management System</h1>
-      </div>
-    );
-  }
-}
+export default HomePage;

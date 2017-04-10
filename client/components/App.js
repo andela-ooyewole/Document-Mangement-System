@@ -1,7 +1,9 @@
 import React from 'react';
+import HomePage from './home/HomePage';
 
-export default () => {
-  return (
-    <h1>Document Management System</h1>
-  );
-};
+
+const App = () => (
+  <HomePage />
+);
+
+export default App;
